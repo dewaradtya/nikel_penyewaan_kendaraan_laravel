@@ -34,7 +34,7 @@ class KendaraanController extends Controller
     {
         $request->validate([
             'jenis_kendaraan' => 'required',
-            'plat_nomor' => 'required',
+            'plat_nomor' => 'required|unique:kendaraans',
             'status' => 'required'
         ]);
 
