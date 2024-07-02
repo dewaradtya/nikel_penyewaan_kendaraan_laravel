@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AllDataExport;
 use App\Exports\PemesananExport;
 use App\Models\Pemesanan;
 use Spatie\Activitylog\Models\Activity;
 use App\Exports\UsersExport;
+use App\Imports\PemesananImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 use Illuminate\Http\Request;
@@ -57,5 +59,21 @@ class PageController extends Controller
     public function export() 
     {
         return Excel::download(new PemesananExport, 'Pemesanan.xlsx');
+    }
+
+    public function exportAll()
+    {
+        return Excel::download(new AllDataExport, 'all_data.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv',
+        ]);
+
+        Excel::import(new PemesananImport, $request->file('file'));
+
+        return redirect()->back()->with('success', 'Data pemesanan berhasil diimport');
     }
 }

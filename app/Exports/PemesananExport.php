@@ -4,8 +4,10 @@ namespace App\Exports;
 
 use App\Models\Pemesanan;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithTitle;
 
-class PemesananExport implements FromCollection
+class PemesananExport implements FromCollection, WithHeadings, WithTitle
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -31,11 +33,26 @@ class PemesananExport implements FromCollection
             }
 
             return [
-                'ID Pemesanan' => $pemesanan->id,
-                'Jenis Kendaraan' => $pemesanan->kendaraan->jenis_kendaraan,
+                'No.' => $pemesanan->id,
+                'Nama Kendaraan' => $pemesanan->kendaraan->id,
                 'Tanggal Pemesanan' => $pemesanan->tanggal_pemesanan,
                 'Status' => $status,
             ];
         });
+    }
+
+    /**
+    * @return array
+    */
+    public function headings(): array
+    {
+        return [
+            'No.', 'Id Kendaraan', 'Tanggal Pemesanan', 'Status'
+        ];
+    }
+
+    public function title(): string
+    {
+        return 'Pemesanan';
     }
 }

@@ -34,4 +34,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kendaraan', KendaraanController::class)->middleware('userAkses:admin');
     Route::resource('pemesanan', PemesananController::class)->middleware('userAkses:admin')->except(['index']);
     Route::get('export', [PageController::class, 'export'])->name('export');
+    Route::get('/export-all', [PageController::class, 'exportAll'])->name('export.all');
+    Route::post('/import', [PageController::class, 'import'])->name('import');
 });

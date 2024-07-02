@@ -8,8 +8,43 @@
                     <a href="{{ route('pemesanan.create') }}" class="btn btn-warning">Tambah Pemesanan</a>
                 @endif
                 <a href="{{ route('export') }}" class="btn btn-success">Export Excel</a>
+                <a href="{{ route('export.all') }}" class="btn btn-info">Export All Data</a>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
+                    Import Excel
+                </button>
             </div>
         </div>
+
+        <div class="modal" id="importModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Import Excel</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="file" class="form-label">Upload file</label>
+                                <input type="file" class="form-control" id="file" name="file" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Import</button>
+                        </form>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
