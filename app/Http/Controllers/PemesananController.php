@@ -14,10 +14,10 @@ class PemesananController extends Controller
      */
     public function index()
     {
-        $pemesanan = Pemesanan::all();
+        $pemesanan = Pemesanan::orderBy('created_at', 'desc')->get();
         $kendaraan = Kendaraan::all();
         return view('pemesanan.index', [
-            'pemesanan' => $pemesanan, 
+            'pemesanan' => $pemesanan,
             'kendaraan' => $kendaraan
         ]);
     }
@@ -27,7 +27,7 @@ class PemesananController extends Controller
      */
     public function create()
     {
-        $kendaraan = Kendaraan::all();   
+        $kendaraan = Kendaraan::where('status', 1)->get();
         return view('pemesanan.create', [
             'kendaraan' => $kendaraan
         ]);
@@ -44,6 +44,13 @@ class PemesananController extends Controller
             'status' => 'required'
         ]);
 
+        // Cek status kendaraan
+        $kendaraan = Kendaraan::findOrFail($request->kendaraan_id);
+
+        if ($kendaraan->status == 0) {
+            return redirect()->back()->with('error', 'Kendaraan tidak tersedia untuk dipesan.');
+        }
+
         $pemesanan = Pemesanan::create([
             'kendaraan_id' => $request->kendaraan_id,
             'tanggal_pemesanan' => $request->tanggal_pemesanan,
@@ -54,7 +61,7 @@ class PemesananController extends Controller
             ->causedBy(Auth::user())
             ->log('Menambahkan pemesanan baru: ' . $pemesanan->id);
 
-        return redirect()->route('pemesanan.index')->with('success', 'pemesanan berhasil ditambahkan');
+        return redirect()->route('pemesanan.index')->with('success', 'Pemesanan berhasil ditambahkan');
     }
 
     /**

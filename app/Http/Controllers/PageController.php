@@ -42,7 +42,7 @@ class PageController extends Controller
 
     public function aktivitas()
     {
-        $activities = Activity::all();
+        $activities = Activity::orderBy('created_at', 'desc')->get();
 
         return view('admin.page.aktivitas', [
             'activities' => $activities,

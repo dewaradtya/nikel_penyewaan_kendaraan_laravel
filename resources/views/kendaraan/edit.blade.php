@@ -6,7 +6,7 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h6 class="m-0 font-weight-bold text-primary">Tambah Kendaraan</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Edit Kendaraan</h6>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('kendaraan.update', $kendaraan->id) }}" method="POST">

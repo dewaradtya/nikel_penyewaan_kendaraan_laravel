@@ -28,7 +28,7 @@
                                             @enderror
                                         </div>
                                         <div class="mb-3">
-                                            <input type="text" name="password" class="form-control form-control-lg"
+                                            <input type="password" name="password" class="form-control form-control-lg"
                                                 placeholder="Password" aria-label="Password" value="{{ old('password') }}">
                                             @error('password')
                                                 <p class="text-danger">{{ $message }}</p>

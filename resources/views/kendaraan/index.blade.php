@@ -13,15 +13,6 @@
                     <div class="card-header pb-0">
                         <h6>Kendaraan</h6>
                     </div>
-                    @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show text-light" role="alert">
-                            <div class="d-flex align-items-center">
-                                <i class="ni ni-check-bold mr-2"></i>
-                                <span>{{ session('success') }}</span>
-                                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        </div>
-                    @endif
 
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">

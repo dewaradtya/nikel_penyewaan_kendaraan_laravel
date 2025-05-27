@@ -26,7 +26,8 @@
                                 <select class="form-control @error('kendaraan_id') is-invalid @enderror"
                                     name="kendaraan_id">
                                     @foreach ($kendaraan as $item)
-                                        <option value="{{ $item->id }}" {{ $pemesanan->kendaraan_id == $item->id ? 'selected' : '' }}>
+                                        <option value="{{ $item->id }}"
+                                            {{ $pemesanan->kendaraan_id == $item->id ? 'selected' : '' }}>
                                             {{ $item->jenis_kendaraan }}
                                         </option>
                                     @endforeach
@@ -37,11 +38,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="status">Status</label>
-                                <select class="form-control" id="status" name="status" @readonly(true)>
+                                <select class="form-control" id="status" name="status_display" disabled>
                                     <option value="1" {{ $pemesanan->status == 1 ? 'selected' : '' }}>Diajukan</option>
-                                    <option value="2" {{ $pemesanan->status == 2 ? 'selected' : '' }}>Disetujui</option>
-                                    <option value="0" {{ $pemesanan->status == 0 ? 'selected' : '' }}>Ditolak</option>
+                                    <option value="2" {{ $pemesanan->status == 0 ? 'selected' : '' }}>Disetujui</option>
+                                    <option value="0" {{ $pemesanan->status == 2 ? 'selected' : '' }}>Ditolak</option>
                                 </select>
+                                <input type="hidden" name="status" value="{{ $pemesanan->status }}">
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                             <a href="{{ route('pemesanan.index') }}" class="btn btn-secondary">Batal</a>

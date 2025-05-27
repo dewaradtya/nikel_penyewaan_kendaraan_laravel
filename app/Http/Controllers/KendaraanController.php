@@ -13,7 +13,7 @@ class KendaraanController extends Controller
      */
     public function index()
     {
-        $kendaraan = Kendaraan::all();
+        $kendaraan = Kendaraan::orderBy('created_at', 'desc')->get();
         return view('kendaraan.index', [
             'kendaraan' => $kendaraan
         ]);
@@ -77,7 +77,7 @@ class KendaraanController extends Controller
     {
         $request->validate([
             'jenis_kendaraan' => 'required',
-            'plat_nomor' => 'required|unique:kendaraans',
+            'plat_nomor' => 'required|unique:kendaraans,plat_nomor,' . $id,
             'status' => 'required'
         ]);
 

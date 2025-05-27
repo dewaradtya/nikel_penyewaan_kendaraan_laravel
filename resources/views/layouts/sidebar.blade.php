@@ -78,16 +78,6 @@
             </ul>
         </div>
         <div class="sidenav-footer mx-3 ">
-            <div class="card card-plain shadow-none" id="sidenavCard">
-                <img class="w-50 mx-auto" src={{ asset('img/illustrations/icon-documentation.svg') }}
-                    alt="sidebar_illustration">
-                <div class="card-body text-center p-3 w-100 pt-0">
-                    <div class="docs-info">
-                        <h6 class="mb-0">Need help?</h6>
-                        <p class="text-xs font-weight-bold mb-0">Please check our docs</p>
-                    </div>
-                </div>
-            </div>
             {{-- <a href="{{ route('dashboard') }}" class="btn btn-dark btn-sm w-100 mb-3">Documentation</a> --}}
             <form action="{{ route('logout') }}" method="POST" class="d-inline">
                 @csrf
@@ -114,7 +104,7 @@
                             <input type="text" class="form-control" placeholder="Type here...">
                         </div>
                     </div>
-                    <ul class="navbar-nav  justify-content-end">
+                    <ul class="navbar-nav justify-content-end">
                         <li class="nav-item d-flex align-items-center">
                             <form action="{{ route('logout') }}" method="post"
                                 class="nav-link text-white font-weight-bold px-0">
@@ -143,6 +133,26 @@
             </div>
         </nav>
         {{-- end navbar --}}
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show text-light" role="alert">
+                <div class="d-flex align-items-center">
+                    <i class="ni ni-check-bold mr-2"></i>
+                    <span>{{ session('error') }}</span>
+                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        @endif
+
+
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show text-light" role="alert">
+                <div class="d-flex align-items-center">
+                    <i class="ni ni-check-bold mr-2"></i>
+                    <span>{{ session('success') }}</span>
+                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        @endif
 
         @yield('content')
 

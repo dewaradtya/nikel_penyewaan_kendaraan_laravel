@@ -8,8 +8,10 @@
                     <a href="{{ route('pemesanan.create') }}" class="btn btn-warning">Tambah Pemesanan</a>
                 @endif
                 <a href="{{ route('export') }}" class="btn btn-success">Export Excel</a>
-                <a href="{{ route('export.all') }}" class="btn btn-info">Export All Data</a>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
+                @if (auth()->user()->role === 'admin')
+                    <a href="{{ route('export.all') }}" class="btn btn-success">Export All Data</a>
+                @endif
+                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#importModal">
                     Import Excel
                 </button>
             </div>
@@ -114,8 +116,8 @@
                                                 @elseif(auth()->user()->role === 'admin')
                                                     <a href="{{ route('pemesanan.edit', $row->id) }}"
                                                         class="btn btn-info">Edit</a>
-                                                    <form action="{{ route('pemesanan.destroy', $row->id) }}" method="post"
-                                                        class="d-inline">
+                                                    <form action="{{ route('pemesanan.destroy', $row->id) }}"
+                                                        method="post" class="d-inline">
                                                         @csrf
                                                         @method('delete')
                                                         <button type="submit" class="btn btn-danger mx-2">Delete</button>
